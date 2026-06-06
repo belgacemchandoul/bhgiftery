@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #faf7f2;
+  --charcoal: #1a1714;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --text-dark: #2c2420;
+  --text-muted: #8c7b6b;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  background-color: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+h1 {
+  font-size: 64px;
+  letter-spacing: 0.08em;
+}
+
+h2 {
+  font-size: 42px;
+  letter-spacing: 0.06em;
+}
+
+h3 {
+  font-size: 28px;
+  letter-spacing: 0.05em;
+}
+
+p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
