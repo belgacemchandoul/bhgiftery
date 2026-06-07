@@ -43,8 +43,8 @@ const services = [
 ];
 
 const stats = [
-  { value: "150+", label: "Événements réalisés" },
-  { value: "5 ans", label: "D'expérience" },
+  { value: "700+", label: "Événements réalisés" },
+  { value: "7+ ans", label: "D'expérience" },
   { value: "100%", label: "Satisfaction client" },
 ];
 

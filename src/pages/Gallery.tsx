@@ -28,10 +28,10 @@ const filters: Filter[] = [
 
 const breakpointCols = { default: 3, 1024: 2, 640: 1 }
 
-const cardHeights: Record<string, string> = {
-  portrait: '400px',
-  landscape: '260px',
-  square: '320px',
+const aspectPadding: Record<string, string> = {
+  portrait: '130%',
+  landscape: '62%',
+  square: '100%',
 }
 
 function Label({ children }: { children: string }) {
@@ -49,24 +49,40 @@ function Label({ children }: { children: string }) {
   )
 }
 
-function GalleryCard({ event }: { event: typeof events[number] }) {
+function GalleryCard({ event, fullWidth = false }: { event: typeof events[number]; fullWidth?: boolean }) {
   const [hovered, setHovered] = useState(false)
+
+  const outerStyle: React.CSSProperties = fullWidth
+    ? { position: 'relative', height: '500px', marginBottom: '1.25rem', overflow: 'hidden', cursor: 'pointer' }
+    : { position: 'relative', paddingBottom: aspectPadding[event.aspectRatio], marginBottom: '1.25rem', overflow: 'hidden', cursor: 'pointer' }
 
   return (
     <div
-      style={{
-        position: 'relative',
-        height: cardHeights[event.aspectRatio],
-        marginBottom: '1.25rem',
-        overflow: 'hidden',
-        cursor: 'pointer',
-      }}
+      style={outerStyle}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <LazyImg alt={event.title} />
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        overflow: 'hidden',
+        transform: hovered ? 'scale(1.03)' : 'scale(1)',
+        transition: 'transform 0.5s ease',
+      }}>
+        {event.mediaType === 'video' ? (
+          <video
+            src={event.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        ) : (
+          <LazyImg src={event.src} alt={event.type} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        )}
+      </div>
 
-      {/* Event type tag */}
       <div style={{
         position: 'absolute',
         top: '1rem',
@@ -81,53 +97,27 @@ function GalleryCard({ event }: { event: typeof events[number] }) {
       }}>
         {event.type}
       </div>
-
-      {/* Hover overlay */}
-      <motion.div
-        initial={false}
-        animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 12 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(26, 23, 20, 0.72)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          padding: '1.5rem',
-          pointerEvents: 'none',
-        }}
-      >
-        <p style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: '20px',
-          letterSpacing: '0.05em',
-          color: 'var(--cream)',
-          fontWeight: 400,
-          lineHeight: 1.25,
-          marginBottom: '0.4rem',
-        }}>
-          {event.title}
-        </p>
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '13px',
-          color: 'rgba(250, 247, 242, 0.65)',
-          lineHeight: 1.55,
-        }}>
-          {event.description}
-        </p>
-      </motion.div>
     </div>
   )
 }
 
+const PAGE_SIZE = 6
+
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState<Filter>('Tous')
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
   const filtered = activeFilter === 'Tous'
     ? events
     : events.filter((e) => e.type === activeFilter)
+
+  const displayed = activeFilter === 'Tous' ? filtered.slice(0, visibleCount) : filtered
+  const showLoadMore = activeFilter === 'Tous' && visibleCount < filtered.length
+
+  function handleFilterChange(f: Filter) {
+    setActiveFilter(f)
+    setVisibleCount(PAGE_SIZE)
+  }
 
   return (
     <>
@@ -220,7 +210,7 @@ export default function Gallery() {
               return (
                 <button
                   key={f}
-                  onClick={() => setActiveFilter(f)}
+                  onClick={() => handleFilterChange(f)}
                   style={{
                     padding: '0 1.25rem',
                     minHeight: '44px',
@@ -262,23 +252,34 @@ export default function Gallery() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.22 }}
               >
-                <Masonry
-                  breakpointCols={breakpointCols}
-                  className="gallery-masonry"
-                  columnClassName="gallery-masonry-col"
-                >
-                  {filtered.map((event, i) => (
-                    <motion.div
-                      key={event.id}
-                      variants={fadeUp}
-                      initial="hidden"
-                      animate="show"
-                      transition={{ delay: i * 0.07 }}
-                    >
-                      <GalleryCard event={event} />
-                    </motion.div>
-                  ))}
-                </Masonry>
+                {displayed.length === 1 ? (
+                  <motion.div
+                    key={displayed[0].id}
+                    variants={fadeUp}
+                    initial="hidden"
+                    animate="show"
+                  >
+                    <GalleryCard event={displayed[0]} fullWidth />
+                  </motion.div>
+                ) : (
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="gallery-masonry"
+                    columnClassName="gallery-masonry-col"
+                  >
+                    {displayed.map((event, i) => (
+                      <motion.div
+                        key={event.id}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="show"
+                        transition={{ delay: i * 0.07 }}
+                      >
+                        <GalleryCard event={event} />
+                      </motion.div>
+                    ))}
+                  </Masonry>
+                )}
               </motion.div>
             </AnimatePresence>
 
@@ -293,6 +294,36 @@ export default function Gallery() {
               }}>
                 Aucune réalisation dans cette catégorie pour le moment.
               </p>
+            )}
+
+            {showLoadMore && (
+              <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+                <button
+                  onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
+                  style={{
+                    padding: '0.85rem 2.5rem',
+                    border: '1px solid var(--gold)',
+                    background: 'transparent',
+                    color: 'var(--gold)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '12px',
+                    letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                    transition: 'background 0.25s ease, color 0.25s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'var(--gold)'
+                    e.currentTarget.style.color = 'var(--charcoal)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.color = 'var(--gold)'
+                  }}
+                >
+                  Voir plus
+                </button>
+              </div>
             )}
           </div>
         </section>
