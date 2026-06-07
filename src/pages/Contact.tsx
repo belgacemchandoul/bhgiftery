@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
-import { MessageCircle, Phone, Mail, MapPin } from 'lucide-react'
+import { MessageCircle, Phone, MapPin } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { fadeUp, stagger } from '../utils/animations'
 
-const WHATSAPP = 'https://wa.me/21600000000'
-const PHONE = '+216 XX XXX XXX'
-const EMAIL = 'contact@bhgiftery.tn'
-const ADDRESS = 'Sfax, Tunisie'
+const WA1 = 'https://wa.me/21625376765'
+const WA2 = 'https://wa.me/21646226863'
+const PHONES = ['+216 25 376 765', '+216 46 226 863']
+const ADDRESS = 'Médenine, Tunisie'
 
 function Label({ children }: { children: string }) {
   return (
@@ -153,44 +153,56 @@ export default function Contact() {
                 Décrivez-nous votre événement, la date, et vos idées. Nous vous répondons rapidement avec une proposition adaptée.
               </motion.p>
 
-              <motion.p
+              <motion.div
                 variants={fadeUp}
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '22px',
-                  letterSpacing: '0.08em',
-                  color: 'var(--text-dark)',
-                  marginBottom: '2.25rem',
-                }}
+                style={{ marginBottom: '2.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}
               >
-                {PHONE}
-              </motion.p>
+                {PHONES.map((p) => (
+                  <p
+                    key={p}
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '22px',
+                      letterSpacing: '0.08em',
+                      color: 'var(--text-dark)',
+                    }}
+                  >
+                    {p}
+                  </p>
+                ))}
+              </motion.div>
 
-              <motion.div variants={fadeUp}>
-                <a
-                  href={WHATSAPP}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.65rem',
-                    padding: '1rem 2.75rem',
-                    background: 'var(--gold)',
-                    color: 'var(--charcoal)',
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '13px',
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    fontWeight: 500,
-                    transition: 'background 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-light)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--gold)')}
-                >
-                  <MessageCircle size={16} strokeWidth={1.5} />
-                  Écrire sur WhatsApp
-                </a>
+              <motion.div variants={fadeUp} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
+                {[
+                  { href: WA1, label: PHONES[0] },
+                  { href: WA2, label: PHONES[1] },
+                ].map(({ href, label }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.65rem',
+                      padding: '1rem 2rem',
+                      background: 'var(--gold)',
+                      color: 'var(--charcoal)',
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '13px',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      fontWeight: 500,
+                      transition: 'background 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-light)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--gold)')}
+                  >
+                    <MessageCircle size={16} strokeWidth={1.5} />
+                    {label}
+                  </a>
+                ))}
               </motion.div>
 
               {/* Divider */}
@@ -214,35 +226,23 @@ export default function Contact() {
                   alignItems: 'center',
                 }}
               >
-                <motion.div
-                  variants={fadeUp}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
-                >
-                  <Phone size={16} color="var(--gold)" strokeWidth={1.5} />
-                  <span style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '14px',
-                    color: 'var(--text-muted)',
-                    letterSpacing: '0.04em',
-                  }}>
-                    {PHONE}
-                  </span>
-                </motion.div>
-
-                <motion.div
-                  variants={fadeUp}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
-                >
-                  <Mail size={16} color="var(--gold)" strokeWidth={1.5} />
-                  <span style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '14px',
-                    color: 'var(--text-muted)',
-                    letterSpacing: '0.04em',
-                  }}>
-                    {EMAIL}
-                  </span>
-                </motion.div>
+                {PHONES.map((p) => (
+                  <motion.div
+                    key={p}
+                    variants={fadeUp}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
+                  >
+                    <Phone size={16} color="var(--gold)" strokeWidth={1.5} />
+                    <span style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '14px',
+                      color: 'var(--text-muted)',
+                      letterSpacing: '0.04em',
+                    }}>
+                      {p}
+                    </span>
+                  </motion.div>
+                ))}
 
                 <motion.div
                   variants={fadeUp}
@@ -307,7 +307,7 @@ export default function Contact() {
             </motion.p>
             <motion.div variants={fadeUp}>
               <a
-                href={WHATSAPP}
+                href={WA1}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

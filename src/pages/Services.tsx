@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, Gem, Gift, Scissors, Flower2, Star, GraduationCap, Sparkles, MessageCircle } from 'lucide-react'
+import { Heart, Gem, Gift, Scissors, Flower2, Star, GraduationCap, Sparkles, MessageCircle, Crown, Briefcase, Coffee, Cake, Ribbon } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -15,6 +15,11 @@ const services = [
     icon: Gem,
     label: 'Fiançailles',
     desc: 'Une ambiance romantique et mémorable pour sceller vos promesses. Décoration intimiste et élégante adaptée à vos goûts.',
+  },
+  {
+    icon: Crown,
+    label: 'Sdag',
+    desc: "Mise en scène raffinée pour la présentation des cadeaux traditionnels. Un moment de prestige et de générosité sublimé.",
   },
   {
     icon: Gift,
@@ -46,9 +51,29 @@ const services = [
     label: 'Décoration sur mesure',
     desc: "Vous avez un événement hors du commun ? Nous concevons des décorations entièrement personnalisées selon votre vision et votre budget.",
   },
+  {
+    icon: Briefcase,
+    label: 'Événements professionnels',
+    desc: "Séminaires, conférences, lancements de produits — une décoration sobre et impactante qui valorise votre image de marque.",
+  },
+  {
+    icon: Coffee,
+    label: 'Pause café',
+    desc: "Transformez vos pauses en moments de convivialité. Installation élégante pour des espaces de détente en entreprise ou événement.",
+  },
+  {
+    icon: Ribbon,
+    label: 'Révélation du sexe',
+    desc: "Un moment de surprise et de joie partagée. Décoration festive et colorée pour révéler le grand secret avec style.",
+  },
+  {
+    icon: Cake,
+    label: 'Fête de naissance',
+    desc: "Bienvenue au monde ! Une décoration chaleureuse et joyeuse pour célébrer l'arrivée du nouveau-né en famille.",
+  },
 ]
 
-const WHATSAPP = 'https://wa.me/21600000000'
+const WHATSAPP = 'https://wa.me/21625376765'
 
 function Label({ children }: { children: string }) {
   return (

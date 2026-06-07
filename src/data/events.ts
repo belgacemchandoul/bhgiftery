@@ -1,11 +1,17 @@
 export type EventType =
   | 'Mariages'
   | 'Fiançailles'
+  | 'Sdag'
   | 'Anniversaires'
   | 'Inaugurations'
   | 'Fête des mères'
   | 'Cérémonies'
-  | 'Remises';
+  | 'Remises de diplômes'
+  | 'Décoration sur mesure'
+  | 'Événements professionnels'
+  | 'Pause café'
+  | 'Révélation du sexe'
+  | 'Fête de naissance';
 
 export interface GalleryEvent {
   id: number;
@@ -16,16 +22,21 @@ export interface GalleryEvent {
 }
 
 export const events: GalleryEvent[] = [
-  { id: 1, type: 'Mariages', title: 'Mariage Sonia & Karim', description: 'Une cérémonie de mariage élégante décorée en blanc et or.', aspectRatio: 'portrait' },
-  { id: 2, type: 'Fiançailles', title: 'Fiançailles Leila & Aymen', description: 'Une soirée de fiançailles romantique avec des fleurs roses.', aspectRatio: 'landscape' },
-  { id: 3, type: 'Anniversaires', title: 'Anniversaire 30 ans Nadia', description: 'Une fête chic avec décoration bordeaux et doré.', aspectRatio: 'square' },
-  { id: 4, type: 'Mariages', title: 'Mariage Amira & Youssef', description: 'Décoration champêtre avec des fleurs séchées et bougies.', aspectRatio: 'portrait' },
-  { id: 5, type: 'Inaugurations', title: 'Inauguration Boutique Luxe', description: 'Décoration inauguration avec ruban rouge et compositions florales.', aspectRatio: 'landscape' },
-  { id: 6, type: 'Cérémonies', title: 'Cérémonie de Remise de Prix', description: 'Mise en scène élégante pour une cérémonie officielle.', aspectRatio: 'square' },
-  { id: 7, type: 'Fête des mères', title: 'Fête des Mères 2024', description: 'Décoration tendre et fleurie pour honorer les mamans.', aspectRatio: 'portrait' },
-  { id: 8, type: 'Remises', title: 'Remise de Diplômes Université', description: 'Décoration académique sobre et élégante.', aspectRatio: 'landscape' },
-  { id: 9, type: 'Fiançailles', title: 'Fiançailles Rania & Maher', description: 'Ambiance féérique avec guirlandes lumineuses et voilages.', aspectRatio: 'square' },
-  { id: 10, type: 'Anniversaires', title: 'Anniversaire Enfant Théo', description: 'Décoration colorée et joyeuse sur le thème des étoiles.', aspectRatio: 'portrait' },
-  { id: 11, type: 'Mariages', title: 'Mariage Mariem & Bilel', description: 'Élégance orientale avec lanternes et soieries dorées.', aspectRatio: 'landscape' },
-  { id: 12, type: 'Inaugurations', title: 'Inauguration Restaurant Zitoun', description: 'Décoration chaleureuse au style méditerranéen.', aspectRatio: 'square' },
+  { id: 1,  type: 'Mariages',        title: 'Mariage Sonia & Karim',          description: 'Une cérémonie de mariage élégante décorée en blanc et or.',        aspectRatio: 'portrait'  },
+  { id: 2,  type: 'Fiançailles',     title: 'Fiançailles Leila & Aymen',       description: 'Une soirée de fiançailles romantique avec des fleurs roses.',       aspectRatio: 'landscape' },
+  { id: 3,  type: 'Anniversaires',   title: 'Anniversaire 30 ans Nadia',       description: 'Une fête chic avec décoration bordeaux et doré.',                   aspectRatio: 'square'    },
+  { id: 4,  type: 'Mariages',        title: 'Mariage Amira & Youssef',         description: 'Décoration champêtre avec des fleurs séchées et bougies.',          aspectRatio: 'portrait'  },
+  { id: 5,  type: 'Inaugurations',   title: 'Inauguration Boutique Luxe',      description: 'Décoration inauguration avec ruban rouge et compositions florales.',  aspectRatio: 'landscape' },
+  { id: 6,  type: 'Cérémonies',      title: 'Cérémonie de Remise de Prix',     description: 'Mise en scène élégante pour une cérémonie officielle.',             aspectRatio: 'square'    },
+  { id: 7,  type: 'Fête des mères',  title: 'Fête des Mères 2024',             description: 'Décoration tendre et fleurie pour honorer les mamans.',             aspectRatio: 'portrait'  },
+  { id: 8,  type: 'Remises de diplômes', title: 'Remise de Diplômes Université', description: 'Décoration académique sobre et élégante.',                        aspectRatio: 'landscape' },
+  { id: 9,  type: 'Fiançailles',     title: 'Fiançailles Rania & Maher',       description: 'Ambiance féérique avec guirlandes lumineuses et voilages.',         aspectRatio: 'square'    },
+  { id: 10, type: 'Anniversaires',   title: 'Anniversaire Enfant Théo',        description: 'Décoration colorée et joyeuse sur le thème des étoiles.',           aspectRatio: 'portrait'  },
+  { id: 11, type: 'Mariages',        title: 'Mariage Mariem & Bilel',          description: 'Élégance orientale avec lanternes et soieries dorées.',             aspectRatio: 'landscape' },
+  { id: 12, type: 'Inaugurations',   title: 'Inauguration Restaurant Zitoun',  description: 'Décoration chaleureuse au style méditerranéen.',                    aspectRatio: 'square'    },
+  { id: 13, type: 'Sdag',            title: 'Sdag Famille Ben Ali',            description: 'Présentation de cadeaux traditionnels dans une mise en scène raffinée.', aspectRatio: 'portrait' },
+  { id: 14, type: 'Révélation du sexe', title: 'Gender Reveal Yasmine',        description: 'Moment de surprise et de joie avec une décoration festive et colorée.', aspectRatio: 'square'  },
+  { id: 16, type: 'Fête de naissance', title: 'Naissance Bébé Adam',           description: 'Célébration de l\'arrivée du nouveau-né dans une ambiance chaleureuse.', aspectRatio: 'portrait' },
+  { id: 17, type: 'Pause café',      title: 'Pause Café Entreprise Slim',      description: 'Installation élégante pour un moment de détente professionnel.',    aspectRatio: 'landscape' },
+  { id: 18, type: 'Événements professionnels', title: 'Séminaire Entreprise TechTN', description: 'Décoration sobre et moderne pour un événement corporate.', aspectRatio: 'square' },
 ];

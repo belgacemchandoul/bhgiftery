@@ -13,11 +13,17 @@ const filters: Filter[] = [
   'Tous',
   'Mariages',
   'Fiançailles',
+  'Sdag',
   'Anniversaires',
   'Inaugurations',
   'Fête des mères',
   'Cérémonies',
-  'Remises',
+  'Remises de diplômes',
+  'Décoration sur mesure',
+  'Événements professionnels',
+  'Pause café',
+  'Révélation du sexe',
+  'Fête de naissance',
 ]
 
 const breakpointCols = { default: 3, 1024: 2, 640: 1 }

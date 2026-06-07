@@ -2,17 +2,17 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import AnimatedStat from '../components/AnimatedStat'
 import LazyImg from '../components/LazyImg'
-import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
+import { Phone, MapPin, MessageCircle } from 'lucide-react'
 import 'leaflet/dist/leaflet.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { fadeUp, stagger } from '../utils/animations'
 
-const WHATSAPP = 'https://wa.me/21600000000'
-const PHONE = '+216 XX XXX XXX'
-const EMAIL = 'contact@bhgiftery.tn'
-const ADDRESS = 'Sfax, Tunisie'
-const SFAX: [number, number] = [34.7406, 10.7603]
+const WA1 = 'https://wa.me/21625376765'
+const WA2 = 'https://wa.me/21646226863'
+const PHONES = ['+216 25 376 765', '+216 46 226 863']
+const ADDRESS = 'Médenine, Tunisie'
+const COORDS: [number, number] = [33.3451825, 10.4953997]
 
 const stats = [
   { value: '150+', label: 'Événements réalisés' },
@@ -46,8 +46,8 @@ function LeafletMap() {
       if (!mapRef.current || instanceRef.current) return
 
       const map = L.map(mapRef.current, {
-        center: SFAX,
-        zoom: 13,
+        center: COORDS,
+        zoom: 17,
         scrollWheelZoom: false,
         zoomControl: true,
       })
@@ -63,9 +63,9 @@ function LeafletMap() {
         iconAnchor: [8, 8],
       })
 
-      L.marker(SFAX, { icon })
+      L.marker(COORDS, { icon })
         .addTo(map)
-        .bindPopup('<b style="font-family:sans-serif;font-size:13px">BH Giftery</b><br><span style="font-family:sans-serif;font-size:12px;color:#8c7b6b">Sfax, Tunisie</span>')
+        .bindPopup('<b style="font-family:sans-serif;font-size:13px">BH Giftery</b><br><span style="font-family:sans-serif;font-size:12px;color:#8c7b6b">Médenine, Tunisie</span>')
 
       instanceRef.current = map
     })
@@ -220,7 +220,7 @@ export default function About() {
                     marginBottom: '1.25rem',
                   }}
                 >
-                  BH Giftery est une entreprise de décoration et d&apos;événementiel basée à Sfax, en Tunisie. Fondée avec la conviction que chaque moment de vie mérite d&apos;être magnifié, nous mettons notre créativité et notre savoir-faire au service de vos plus belles occasions.
+                  BH Giftery est une entreprise de décoration et d&apos;événementiel basée à Médenine, en Tunisie. Fondée avec la conviction que chaque moment de vie mérite d&apos;être magnifié, nous mettons notre créativité et notre savoir-faire au service de vos plus belles occasions.
                 </motion.p>
 
                 <motion.p
@@ -310,7 +310,7 @@ export default function About() {
                 color: 'var(--text-dark)',
                 fontWeight: 400,
               }}>
-                Basés à Sfax, Tunisie
+                Basés à Médenine, Tunisie
               </h2>
             </motion.div>
 
@@ -330,6 +330,38 @@ export default function About() {
               {/* Map */}
               <motion.div variants={fadeUp}>
                 <LeafletMap />
+                <a
+                  href="https://www.google.com/maps/place/Bh+giftry/@33.3452772,10.495096,152m/data=!3m1!1e3!4m6!3m5!1s0x13aad5005faf6d01:0xa31d2e643cc06953!8m2!3d33.3451825!4d10.4953997!16s%2Fg%2F11mt7rz9yg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.55rem',
+                    marginTop: '1rem',
+                    padding: '0.75rem 1.5rem',
+                    border: '1px solid rgba(201, 168, 76, 0.5)',
+                    color: 'var(--gold)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '12px',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                    background: 'transparent',
+                    transition: 'border-color 0.3s ease, color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--gold)'
+                    e.currentTarget.style.color = 'var(--gold-light)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(201, 168, 76, 0.5)'
+                    e.currentTarget.style.color = 'var(--gold)'
+                  }}
+                >
+                  <MapPin size={14} strokeWidth={1.5} />
+                  Ouvrir dans Google Maps
+                </a>
               </motion.div>
 
               {/* Contact details */}
@@ -363,44 +395,9 @@ export default function About() {
                         fontFamily: 'var(--font-body)',
                         fontSize: '15px',
                         color: 'var(--text-dark)',
+                        lineHeight: 1.6,
                       }}>
-                        {PHONE}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div variants={fadeUp}>
-                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                    <div style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      background: 'rgba(201, 168, 76, 0.12)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                    }}>
-                      <Mail size={16} color="var(--gold)" strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <p style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: '11px',
-                        letterSpacing: '0.14em',
-                        textTransform: 'uppercase',
-                        color: 'var(--gold)',
-                        marginBottom: '0.3rem',
-                      }}>
-                        Email
-                      </p>
-                      <p style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: '15px',
-                        color: 'var(--text-dark)',
-                      }}>
-                        {EMAIL}
+                        {PHONES[0]}<br />{PHONES[1]}
                       </p>
                     </div>
                   </div>
@@ -443,31 +440,37 @@ export default function About() {
                   </div>
                 </motion.div>
 
-                <motion.div variants={fadeUp} style={{ paddingTop: '0.75rem' }}>
-                  <a
-                    href={WHATSAPP}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.6rem',
-                      padding: '1rem 2.25rem',
-                      background: 'var(--gold)',
-                      color: 'var(--charcoal)',
-                      fontFamily: 'var(--font-body)',
-                      fontSize: '12px',
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                      fontWeight: 500,
-                      transition: 'background 0.3s ease',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-light)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--gold)')}
-                  >
-                    <MessageCircle size={15} strokeWidth={1.5} />
-                    WhatsApp
-                  </a>
+                <motion.div variants={fadeUp} style={{ paddingTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  {[
+                    { href: WA1, label: PHONES[0] },
+                    { href: WA2, label: PHONES[1] },
+                  ].map(({ href, label }) => (
+                    <a
+                      key={href}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.6rem',
+                        padding: '0.85rem 2.25rem',
+                        background: 'var(--gold)',
+                        color: 'var(--charcoal)',
+                        fontFamily: 'var(--font-body)',
+                        fontSize: '12px',
+                        letterSpacing: '0.15em',
+                        textTransform: 'uppercase',
+                        fontWeight: 500,
+                        transition: 'background 0.3s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-light)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--gold)')}
+                    >
+                      <MessageCircle size={15} strokeWidth={1.5} />
+                      {label}
+                    </a>
+                  ))}
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -524,7 +527,7 @@ export default function About() {
             </motion.p>
             <motion.div variants={fadeUp}>
               <a
-                href={WHATSAPP}
+                href={WA1}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
