@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Masonry from 'react-masonry-css'
 import { events, type EventType } from '../data/events'
 import LazyImg from '../components/LazyImg'
+import ShimmerVideo from '../components/ShimmerVideo'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { fadeUp } from '../utils/animations'
@@ -70,14 +71,7 @@ function GalleryCard({ event, fullWidth = false }: { event: typeof events[number
         transition: 'transform 0.5s ease',
       }}>
         {event.mediaType === 'video' ? (
-          <video
-            src={event.src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
+          <ShimmerVideo src={event.src} autoPlay muted loop playsInline />
         ) : (
           <LazyImg src={event.src} alt={event.type} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         )}

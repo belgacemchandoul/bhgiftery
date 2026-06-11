@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import AnimatedStat from "../components/AnimatedStat";
 import LazyImg from "../components/LazyImg";
+import ShimmerVideo from "../components/ShimmerVideo";
 import { motion, useReducedMotion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -847,19 +848,7 @@ export default function Home() {
                 }}
                 className="featured-video-container"
               >
-                <video
-                  src="/alaune.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
+                <ShimmerVideo src="/alaune.mp4" autoPlay muted loop playsInline />
               </div>
 
               <div>
