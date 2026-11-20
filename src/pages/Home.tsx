@@ -44,7 +44,7 @@ const services = [
 ];
 
 const stats = [
-  { value: "700+", label: "Événements réalisés" },
+  { value: "800+", label: "Événements réalisés" },
   { value: "7+ ans", label: "D'expérience" },
   { value: "100%", label: "Satisfaction client" },
 ];
@@ -200,7 +200,7 @@ function SectionDivider() {
 export default function Home() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [slideCount, setSlideCount] = useState(4);
+  const [slideCount, setSlideCount] = useState(6);
   const isPausedRef = useRef(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -481,6 +481,8 @@ export default function Home() {
                   "/carroussel2.jpeg",
                   "/carroussel3.jpeg",
                   "/carroussel4.jpeg",
+                  "/carroussel5.jpeg",
+                  "/carroussel6.jpeg",
                 ].map((src) => (
                   <div
                     key={src}
@@ -848,7 +850,13 @@ export default function Home() {
                 }}
                 className="featured-video-container"
               >
-                <ShimmerVideo src="/alaune.mp4" autoPlay muted loop playsInline />
+                <ShimmerVideo
+                  src="/alaune.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
               </div>
 
               <div>
